@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여행 웹페이지</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="layout-container"></div>
+    <script>
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('layout-container').innerHTML = data;
+            });
+    </script>
+
+    <main>
+        <div class="search-bar">
+            <input type="text" placeholder="Hinted search text" />
+            <button class="search-button">🔍</button>
+        </div>
+        <div class="carousel">
+            <div class="slides">
+                <div class="carousel-item">
+                    <img src="images/방콕.jpg" alt="여행지1">
+                </div>
+                <div class="carousel-item">
+                    <img src="images/서울.jpg" alt="여행지2">
+                </div>
+                <div class="carousel-item">
+                    <img src="images/청주.jpg" alt="여행지3">
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="prev-button">◀</button>
+            <button class="next-button">▶</button>
+        </div>
+        <div class="actions">
+            <button class="interest-button">관심여행지(1)</button>
+            <button class="plan-button">계획짜기</button>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
