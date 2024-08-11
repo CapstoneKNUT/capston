@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여행 가게 정보</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="layout-container"></div>
+  <script>
+      fetch('menu.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('layout-container').innerHTML = data;
+          });
+  </script>
+
+    <div class="search-bar">
+        <input type="text" placeholder="지역 또는 가게 유형 검색">
+        <button>검색</button>
+    </div>
+    <div class="store-grid">
+        <div class="store-card">
+            <img src="images/메가커피.jpg" alt="가게 사진">
+            <h3>메가 커피</h3>
+            <p>카페</p>
+        </div>
+        <div class="store-card">
+            <img src="images/용용선생.jpg" alt="가게 사진">
+            <h3>용용 선생</h3>
+            <p>술집</p>
+        </div>
+        <div class="store-card">
+            <img src="images/한신포차.jpg" alt="가게 사진">
+            <h3>한신 포차</h3>
+            <p>술집</p>
+        </div>
+        <!-- 추가 가게 정보 카드 -->
+    </div>
+</body>
+</html>
