@@ -4,9 +4,9 @@ import Profile from './Profile';
 import Setting from './Setting';
 import profileimages from './회원.jpg';
 import settingimages from './설정.jpg';
-import slideImage1 from './메가커피.jpg'; // 슬라이드 이미지 파일 추가
-import slideImage2 from './용용선생.jpg'; // 슬라이드 이미지 파일 추가
-import slideImage3 from './한신포차.jpg'; // 슬라이드 이미지 파일 추가
+import slideImage1 from './방콕.jpg'; // 슬라이드 이미지 파일 추가
+import slideImage2 from './서울.jpg'; // 슬라이드 이미지 파일 추가
+import slideImage3 from './청주.jpg'; // 슬라이드 이미지 파일 추가
 import './App.css';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
