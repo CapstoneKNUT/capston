@@ -1,0 +1,133 @@
+.App {
+  text-align: center;
+}
+
+body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+}
+
+.menubar {
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.travel_info {
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.menu-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.menu-icons .profile .setting {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.slider-container {
+  position: absolute;
+  top: 200px;
+  width: 80%;
+  left: 125px;
+  margin: 20px auto;
+}
+
+.slide-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* 슬라이더의 높이를 설정합니다 */
+}
+
+.slide-image {
+  position: absolute;
+  margin-left: 350px;
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.search-bar {
+  position: absolute;
+  top: 60px;
+  right: 1100px;
+  margin-top: 40px;
+  width: 200px;
+  height: 25px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.search {
+  position: absolute;
+  top: 60px;
+  margin-top: 40px;
+  right: 1050px;
+  width: 50px;
+  height: 49px;
+}
+
+.list-button {
+  position: absolute;
+  left: 1100px;
+  top: 600px;
+  width: 70px;
+  height: 50px;
+}
+
+.plan-button {
+  position: absolute;
+  left: 1180px;
+  top: 600px;
+  width: 70px;
+  height: 50px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
