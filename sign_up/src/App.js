@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import profileimages from './회원.jpg';
+import settingimages from './설정.jpg';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='menubar'>
+        <div>🏠 Home</div>
+        <div className='travel-info'>여행지 정보</div>
+        <div className='travel-info'>리뷰 목록</div>
+        <div className='travel-info'>마이 페이지</div>
+        <div className='menu-icons'>
+            <img src={profileimages} alt='Profile' className='profile'></img>
+            <img src={settingimages} alt='Setting' className='setting'></img>
+        </div>
+      </div>
     </div>
   );
 }
