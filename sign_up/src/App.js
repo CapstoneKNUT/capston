@@ -17,6 +17,17 @@ function App() {
             <img src={settingimages} alt='Setting' className='setting'></img>
         </div>
       </div>
+      <div className='container'>
+        <div className='sign-box'>
+          <label htmlFor='email'>Email</label>
+          <input type='email' id='email' placeholder='Value' /><br></br>
+          <label htmlFor='password'>Password</label>
+          <input type='password' id='password' placeholder='Value' /><br></br>
+          <label htmlFor='recheck'>recheck</label>
+          <input type='password' id='password' placeholder='Value' /><br></br>
+          
+        </div>
+      </div>
     </div>
   );
 }
