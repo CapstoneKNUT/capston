@@ -3,34 +3,14 @@
 }
 
 /* App.css */
-
-/* 전체 레이아웃 */
-.App {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* 헤더 스타일 */
-header {
+body {
+  padding: 0;
   display: flex;
-  justify-content: center;
-  background-color: #f8f9fa;
-  padding: 10px 0;
-  margin-bottom: 20px;
+  flex-direction: column;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
 }
-
-header nav a {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-header nav a:hover {
-  text-decoration: underline;
-}
-
 /* 검색 페이지 스타일 */
 .search-page {
   text-align: center;

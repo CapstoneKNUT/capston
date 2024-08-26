@@ -7,20 +7,30 @@ function ResultsPage() {
   const location = useLocation();
 
   useEffect(() => {
+    // URL에서 검색 매개변수 추출
     const searchParams = new URLSearchParams(location.search);
-    const locationParam = searchParams.get('location');
-    const keywordParam = searchParams.get('keyword');
+    const locationParam = searchParams.get('location') || '';
+    const districtParam = searchParams.get('district') || '';
+    const keywordParam = searchParams.get('keyword') || '';
 
-    // API 호출 및 결과 설정 로직 - 실제 API 연동 시 아래 코드 대신 API 호출 코드를 작성하세요.
-    setResults([
-      { id: 1, name: '남도하우스 양주점', category: '카페', location: '양주' },
-      { id: 2, name: '고래캠핑식당', category: '식당', location: '인천' },
-      { id: 3, name: '서울바당 뚝섬점', category: '식당', location: '서울' },
-      { id: 4, name: '봉무다방', category: '카페', location: '대구' },
-      { id: 5, name: '해수커피하우스', category: '카페', location: '부산' },
-      { id: 6, name: '오빵 용마루공원점', category: '베이커리', location: '영주' },
-      // 더 많은 결과를 여기에 추가합니다.
-    ]);
+    // 가상의 검색 결과 데이터
+    const allResults = [
+      { id: 1, name: '서울 남산타워', category: 'attraction', location: '서울', district: '중구' },
+      { id: 2, name: '서울 대공원', category: 'attraction', location: '서울', district: '과천시' },
+      { id: 3, name: '부산 해운대', category: 'beach', location: '부산', district: '해운대구' },
+      { id: 4, name: '서울 타워 카페', category: 'cafe', location: '서울', district: '종로구' },
+      { id: 5, name: '강릉 커피숍', category: 'cafe', location: '강원도', district: '강릉시' },
+    ];
+
+    // 검색 결과 필터링
+    const filteredResults = allResults.filter((item) => {
+      const matchesLocation = locationParam ? item.location.includes(locationParam) : true;
+      const matchesDistrict = districtParam ? item.district.includes(districtParam) : true;
+      const matchesKeyword = keywordParam ? item.name.includes(keywordParam) : true;
+      return matchesLocation && matchesDistrict && matchesKeyword;
+    });
+
+    setResults(filteredResults);
   }, [location]);
 
   return (
@@ -31,7 +41,7 @@ function ResultsPage() {
           <li key={item.id}>
             <div>{item.name}</div>
             <div>{item.category}</div>
-            <div>{item.location}</div>
+            <div>{item.location} - {item.district}</div>
           </li>
         ))}
       </ul>
