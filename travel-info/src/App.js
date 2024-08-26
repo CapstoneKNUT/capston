@@ -1,21 +1,20 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Header from './Header';
+import HeaderPage from './Header';
 import SearchPage from './SearchPage';
 import ResultsPage from './ResultsPage';
-import './App.css'; // CSS 파일 import
+import DetailPage from './DetailPage';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Header />
-        <Switch>
-          <Route exact path="/" component={SearchPage} />
-          <Route path="/results" component={ResultsPage} />
-        </Switch>
-      </div>
+      <HeaderPage />
+      <Switch>
+        <Route path="/" exact component={SearchPage} />
+        <Route path="/results" component={ResultsPage} />
+        <Route path="/detail/:storeId" component={DetailPage} />
+      </Switch>
     </Router>
   );
 }
