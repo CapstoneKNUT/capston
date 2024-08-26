@@ -5,6 +5,7 @@ import HeaderPage from './Header';
 import SearchPage from './SearchPage';
 import ResultsPage from './ResultsPage';
 import DetailPage from './DetailPage';
+import Signup from './Sign_up';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" exact component={SearchPage} />
         <Route path="/results" component={ResultsPage} />
         <Route path="/detail/:storeId" component={DetailPage} />
+        <Route path="/Sign_up" component={Signup} />
       </Switch>
     </Router>
   );
