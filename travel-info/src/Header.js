@@ -23,7 +23,7 @@ function Header() {
         <Link to="/mypage">마이 페이지</Link>
       </div>
       <div className='menu-icons'>
-        <Link to="/Sign_up">
+        <Link to="/Login">
           <img src={profileimages} alt='Profile' className='profile' />
         </Link>
         <img src={settingimages} alt='Setting' className='setting' />
