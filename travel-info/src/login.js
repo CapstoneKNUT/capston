@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './login.css';
 import { Link } from 'react-router-dom';
 
