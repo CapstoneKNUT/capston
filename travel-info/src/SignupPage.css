@@ -1,0 +1,40 @@
+/* SignupPage.css */
+.signup-page {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sns-login {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sns-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.manual-signup {
+  margin-top: 20px;
+}
+
+.manual-signup input {
+  width: calc(100% - 10px);
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.terms div {
+  margin-bottom: 10px;
+}
+
+.terms input {
+  margin-right: 5px;
+}

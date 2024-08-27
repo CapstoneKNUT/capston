@@ -7,6 +7,7 @@ import ResultsPage from './ResultsPage';
 import DetailPage from './DetailPage';
 import Signup from './Sign_up';
 import Login from './login';
+import SignupPage from './SignupPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/detail/:storeId" component={DetailPage} />
         <Route path="/Sign_up" component={Signup} />
         <Route path="/Login" component={Login} />
+        <Route path="/signup" component={SignupPage} />
       </Switch>
     </Router>
   );
