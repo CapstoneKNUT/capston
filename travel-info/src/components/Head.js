@@ -11,7 +11,6 @@ function Head({ setSearchQuery }) {
       />
       <div className="tabs">
         <span className="tab active">국내</span>
-        <span className="tab">해외</span>
       </div>
     </div>
   );
