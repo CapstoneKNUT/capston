@@ -11,7 +11,7 @@ function Header() {
     <div className='menubar'>
       {/* Link 컴포넌트를 사용하여 각 메뉴 항목을 클릭할 때 이동할 경로를 지정합니다. */}
       <div>
-        <Link to="/app">🏠 Home</Link>
+        <Link to="/Home">🏠 Home</Link>
       </div>
       <div className='travel-info'>
         <Link to="/">여행지 정보</Link>
