@@ -1,7 +1,7 @@
-// components/DetailPage.js
+// src/place/Read.js
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import './DetailPage.css';
+import './Read.css';
 
 const storeDetails = {
   1: {
@@ -17,8 +17,8 @@ const storeDetails = {
   // 다른 가게 정보 추가
 };
 
-function DetailPage() {
-  const { storeId } = useParams();
+function Read() { // 함수 이름을 대문자로 시작하도록 변경
+  const { storeId } = useParams(); // 훅을 컴포넌트 최상위 레벨에서 사용
   const store = storeDetails[storeId];
 
   if (!store) {
@@ -33,7 +33,7 @@ function DetailPage() {
       <div className="store-info">
         <p><strong>주소:</strong> {store.address}</p>
         <p><strong>연락처:</strong> {store.phone}</p>
-        <p><strong>홈페이지:</strong> <a href={store.website}>{store.website}</a></p>
+        <p><strong>홈페이지:</strong> <a href={store.website} target="_blank" rel="noopener noreferrer">{store.website}</a></p>
         <p><strong>영업시간:</strong> {store.hours}</p>
       </div>
       <div className="store-categories">
@@ -45,4 +45,4 @@ function DetailPage() {
   );
 }
 
-export default DetailPage;
+export default Read; // 변경된 컴포넌트 이름에 따라 export 문도 변경

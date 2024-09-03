@@ -17,6 +17,9 @@ function Header() {
         <Link to="/">여행지 정보</Link>
       </div>
       <div className='travel-info'>
+        <Link to="/">일정 짜기</Link>
+      </div>
+      <div className='travel-info'>
         <Link to="/reviews">리뷰 목록</Link>
       </div>
       <div className='travel-info'>
