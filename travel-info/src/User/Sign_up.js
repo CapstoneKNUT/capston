@@ -1,7 +1,5 @@
 import './Sign_up.css';
 import React from 'react';
-import profileimages from './회원.jpg';
-import settingimages from './설정.jpg';
 
 function Sign_up() {
   return (

@@ -1,13 +1,13 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import HeaderPage from './Header';
-import SearchPage from './SearchPage';
-import ResultsPage from './ResultsPage';
-import DetailPage from './DetailPage';
-import Signup from './Sign_up';
-import Login from './login';
-import Home from './Home';
+import HeaderPage from './Header/Header';
+import SearchPage from './Region-info/SearchPage';
+import ResultsPage from './Region-info/ResultsPage';
+import DetailPage from './Region-info/DetailPage';
+import Signup from './User/Sign_up';
+import Login from './User/login';
+import Home from './Main/Home';
 import Mypage from './MyPage';
 
 function App() {
