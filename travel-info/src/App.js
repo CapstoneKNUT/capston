@@ -8,6 +8,7 @@ import DetailPage from './DetailPage';
 import Signup from './Sign_up';
 import Login from './login';
 import Home from './Home';
+import Mypage from './MyPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Sign_up" component={Signup} />
         <Route path="/Login" component={Login} />
         <Route path="/Home" component={Home} />
+        <Route path="/Mypage" component={Mypage} />
       </Switch>
     </Router>
   );

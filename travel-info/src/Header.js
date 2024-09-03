@@ -20,7 +20,10 @@ function Header() {
         <Link to="/reviews">리뷰 목록</Link>
       </div>
       <div className='travel-info'>
-        <Link to="/mypage">마이 페이지</Link>
+        <Link to="/">찜 목록</Link>
+      </div>
+      <div className='travel-info'>
+        <Link to="/Mypage">마이 페이지</Link>
       </div>
       <div className='menu-icons'>
         <Link to="/Login">

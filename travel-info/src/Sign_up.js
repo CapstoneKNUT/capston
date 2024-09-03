@@ -8,7 +8,7 @@ function Sign_up() {
     <div className="Sign_up">
       <div className='container'>
         <div className='sign-box'>
-          <label htmlFor='email'>Email</label>
+          <label htmlFor='email'>Email </label>
           <input type='email' id='email' placeholder='Value' /><br></br>
           <label htmlFor='password'>Password</label>
           <input type='password' id='password' placeholder='Value' /><br></br>
