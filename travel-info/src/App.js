@@ -8,6 +8,7 @@ import Signup from './User/Sign_up';
 import Login from './User/login';
 import Main from './Main/Main';
 import Mypage from './MyPage';
+import Date from './Plan/TravelDatePicker';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Login" component={Login} />
         <Route path="/Main" component={Main} />
         <Route path="/Mypage" component={Mypage} />
+        <Route path='/Date' component={Date} />
       </Switch>
     </Router>
   );
