@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Home_Header from './components/Head';
 import TravelCard from './components/TravelCard';
 import { regions } from './data/regions';
-import './Home.css';
+import './Main.css';
 
-function Home() {
+function Main() {
   const [searchQuery, setSearchQuery] = useState('');
 
   // 검색된 결과 필터링
@@ -24,4 +24,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Main;

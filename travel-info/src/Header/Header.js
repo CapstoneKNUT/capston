@@ -11,16 +11,16 @@ function Header() {
     <div className='menubar'>
       {/* Link 컴포넌트를 사용하여 각 메뉴 항목을 클릭할 때 이동할 경로를 지정합니다. */}
       <div>
-        <Link to="/Home">🏠 Home</Link>
+        <Link to="/Main">🏠 Home</Link>
       </div>
       <div className='travel-info'>
-        <Link to="/">여행지 정보</Link>
+        <Link to="/list">여행지 정보</Link>
       </div>
       <div className='travel-info'>
         <Link to="/">일정 짜기</Link>
       </div>
       <div className='travel-info'>
-        <Link to="/reviews">리뷰 목록</Link>
+        <Link to="/review">리뷰 목록</Link>
       </div>
       <div className='travel-info'>
         <Link to="/">찜 목록</Link>

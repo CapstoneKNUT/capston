@@ -19,7 +19,7 @@ function SearchPage() {
   const handleSearch = (e) => {
     e.preventDefault();
     // location, district, keyword를 URL 쿼리 파라미터로 추가
-    history.push(`/results?location=${location}&district=${district}&keyword=${keyword}`);
+    history.push(`/list?location=${location}&district=${district}&keyword=${keyword}`);
   };
 
   const handleLocationChange = (e) => {
