@@ -1,6 +1,5 @@
-// components/ResultsPage.js
 import React, { useEffect, useState } from 'react';
-import { useLocation, useHistory, Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import './Lists.css';  // CSS 파일을 임포트
 
 function Lists() {
@@ -9,7 +8,7 @@ function Lists() {
   const [districtInput, setDistrictInput] = useState('');
   const [keywordInput, setKeywordInput] = useState('');
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate(); // useHistory 대신 useNavigate 사용
 
   // "여행지"와 관련된 단어 리스트
   const relatedTravelWords = ['attraction', 'beach', 'park', 'mountain', 'museum', 'cafe', 'landmark'];
@@ -22,7 +21,7 @@ function Lists() {
     if (districtInput) searchParams.append('district', districtInput);
     if (keywordInput) searchParams.append('keyword', keywordInput);
     
-    history.push(`?${searchParams.toString()}`);
+    navigate(`?${searchParams.toString()}`); // useNavigate로 페이지 이동
   };
 
   useEffect(() => {
@@ -65,13 +64,13 @@ function Lists() {
           type="text"
           value={districtInput}
           onChange={(e) => setDistrictInput(e.target.value)}
-          placeholder="위치 검색"
+          placeholder="지역 검색"
         />
         <input
           type="text"
           value={locationInput}
           onChange={(e) => setLocationInput(e.target.value)}
-          placeholder="지역 검색"
+          placeholder="위치 검색"
         />
         <input
           type="text"

@@ -1,6 +1,6 @@
 // components/SearchPage.js
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // 지역과 시/군 데이터
 const cities = {
@@ -14,12 +14,12 @@ function SearchPage() {
   const [location, setLocation] = useState('');
   const [district, setDistrict] = useState('');
   const [keyword, setKeyword] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();  // useHistory 대신 useNavigate 사용
 
   const handleSearch = (e) => {
     e.preventDefault();
     // location, district, keyword를 URL 쿼리 파라미터로 추가
-    history.push(`/list?location=${location}&district=${district}&keyword=${keyword}`);
+    navigate(`/list?location=${location}&district=${district}&keyword=${keyword}`);
   };
 
   const handleLocationChange = (e) => {
@@ -31,12 +31,15 @@ function SearchPage() {
     <div className="search-page">
       <h1>여행지 검색</h1>
       <form onSubmit={handleSearch}>
+        {/* 지역 선택 */}
         <select value={location} onChange={handleLocationChange}>
           <option value="">지역 선택</option>
           {Object.keys(cities).map((city) => (
             <option key={city} value={city}>{city}</option>
           ))}
         </select>
+
+        {/* 시/군 선택 */}
         {location && (
           <select value={district} onChange={(e) => setDistrict(e.target.value)}>
             <option value="">시/군 선택</option>
@@ -45,6 +48,8 @@ function SearchPage() {
             ))}
           </select>
         )}
+
+        {/* 키워드 검색 */}
         <input
           type="text"
           value={keyword}
