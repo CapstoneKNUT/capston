@@ -1,12 +1,12 @@
-// components/TravelDatePicker.js
+// TravelDatePicker.js
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './TravelDatePicker.css';
 
-function TravelDatePicker({ onNext }) {
-  const [startDate, setStartDate] = useState(null); // 출발 날짜
-  const [endDate, setEndDate] = useState(null); // 도착 날짜
+function TravelDatePicker({ onNext }) {  // onNext prop을 받음
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const handleDateChange = (dates) => {
     const [start, end] = dates;
@@ -15,11 +15,13 @@ function TravelDatePicker({ onNext }) {
   };
 
   const handleNextStep = () => {
-    if (startDate && endDate) {
-      onNext({ startDate, endDate });
-    } else {
+    if (!startDate || !endDate) {
       alert("여행 날짜를 모두 선택해 주세요.");
+      return;
     }
+
+    // 부모 컴포넌트로 선택된 날짜 전달
+    onNext({ startDate, endDate });
   };
 
   return (
@@ -34,8 +36,8 @@ function TravelDatePicker({ onNext }) {
         selectsRange
         inline
         minDate={new Date()}
-        maxDate={new Date().setDate(new Date().getDate() + 365)} // 최대 1년 이후까지 선택 가능
-        monthsShown={2} // 두 달씩 표시
+        maxDate={new Date().setDate(new Date().getDate() + 365)}
+        monthsShown={2}
         dateFormat="yyyy년 MM월 dd일"
       />
       <button onClick={handleNextStep}>선택</button>

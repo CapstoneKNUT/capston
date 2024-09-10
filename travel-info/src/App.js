@@ -10,7 +10,7 @@ import Main from './Main/Main';
 import Mypage from './MyPage';
 import Date from './Plan/TravelDatePicker';
 import Travelplan from './Plan/TravelPlan';
-import NextStep from './Plan/next-step';
+import NextStep from './Plan/NextStep';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         <Route path="/Main" element={<Main />} />
         <Route path="/Mypage" element={<Mypage />} />
         <Route path='/Date' element={<Date />} />
-        <Route path="/" element={<Travelplan />} />
+        <Route path="/travelplan" element={<Travelplan />} />
         <Route path="/next-step" element={<NextStep />} />
       </Routes>
     </Router>

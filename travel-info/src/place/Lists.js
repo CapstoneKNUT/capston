@@ -16,6 +16,7 @@ function Lists() {
   // 검색 기능
   const handleSearch = (e) => {
     e.preventDefault();
+
     const searchParams = new URLSearchParams();
     if (locationInput) searchParams.append('location', locationInput);
     if (districtInput) searchParams.append('district', districtInput);
@@ -38,6 +39,13 @@ function Lists() {
       { id: 5, name: '강릉 커피숍', category: 'cafe', location: '강원도', district: '강릉시' },
     ];
 
+    // 검색 조건이 모두 비어 있으면 모든 항목을 보여줌
+    if (!locationParam && !districtParam && !keywordParam) {
+      setResults(allResults);
+      return;
+    }
+
+    // 검색 조건이 있을 경우 필터링
     const filteredResults = allResults.filter((item) => {
       const matchesLocation = locationParam ? item.location.includes(locationParam) : true;
       const matchesDistrict = districtParam ? item.district.includes(districtParam) : true;
@@ -52,7 +60,7 @@ function Lists() {
     });
 
     setResults(filteredResults);
-  }, [location]);
+  }, [location, relatedTravelWords]);
 
   return (
     <div className="results-page">
@@ -64,13 +72,13 @@ function Lists() {
           type="text"
           value={districtInput}
           onChange={(e) => setDistrictInput(e.target.value)}
-          placeholder="지역 검색"
+          placeholder="위치 검색" // 위치 검색 (구/군)
         />
         <input
           type="text"
           value={locationInput}
           onChange={(e) => setLocationInput(e.target.value)}
-          placeholder="위치 검색"
+          placeholder="지역 검색" // 지역 검색 (시/도)
         />
         <input
           type="text"
