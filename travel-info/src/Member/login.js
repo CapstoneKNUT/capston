@@ -15,7 +15,7 @@ function login() {
           <button type='button'>Log in</button>
           <div className='login-links'>
             <a href='#'>Forgot password?</a>
-            <Link to="./Sign_up">
+            <Link to="/member/join">
             <a href='#'>Sign up</a>
             </Link>
           </div>

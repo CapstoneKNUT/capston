@@ -11,13 +11,13 @@ function Header() {
     <div className='menubar'>
       {/* Link 컴포넌트를 사용하여 각 메뉴 항목을 클릭할 때 이동할 경로를 지정합니다. */}
       <div>
-        <Link to="/Main">🏠 Home</Link>
+        <Link to="/main">🏠 Home</Link>
       </div>
       <div className='travel-info'>
         <Link to="/list">여행지 정보</Link>
       </div>
       <div className='travel-info'>
-        <Link to="/Date">일정 짜기</Link>
+        <Link to="/date">일정 짜기</Link>
       </div>
       <div className='travel-info'>
         <Link to="/review">리뷰 목록</Link>
@@ -26,10 +26,10 @@ function Header() {
         <Link to="/list">찜 목록</Link>
       </div>
       <div className='travel-info'>
-        <Link to="/Mypage">마이 페이지</Link>
+        <Link to="/mypage">마이 페이지</Link>
       </div>
       <div className='menu-icons'>
-        <Link to="/Login">
+        <Link to="/member">
           <img src={profileimages} alt='Profile' className='profile' />
         </Link>
         <img src={settingimages} alt='Setting' className='setting' />
