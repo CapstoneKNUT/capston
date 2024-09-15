@@ -20,7 +20,6 @@ function MyPage() {
       <nav className="mypage-nav">
         <ul>
           <li>MY작성글</li>
-          <li>MY댓글</li>
           <li>내 일정</li>
           <li>내정보 수정</li>
         </ul>
