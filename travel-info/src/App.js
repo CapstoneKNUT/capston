@@ -22,7 +22,7 @@ function App() {
         <Route path="/member/:join" element={<Signup />} />
         <Route path="/member" element={<Login />} />
         <Route path="/main" element={<Main />} />
-        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mine" element={<Mypage />} />
         <Route path='/date' element={<Date />} />
         <Route path="/travelplan" element={<Travelplan />} />
         <Route path="/next-step" element={<NextStep />} />

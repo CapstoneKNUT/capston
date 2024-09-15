@@ -26,7 +26,7 @@ function Header() {
         <Link to="/list">찜 목록</Link>
       </div>
       <div className='travel-info'>
-        <Link to="/mypage">마이 페이지</Link>
+        <Link to="/mine">마이 페이지</Link>
       </div>
       <div className='menu-icons'>
         <Link to="/member">
