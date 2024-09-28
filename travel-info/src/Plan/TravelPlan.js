@@ -17,7 +17,7 @@ function TravelPlan() {
   return (
     <div>
       {!dates ? (
-        // onNext prop을 TravelDatePicker에 전달
+        // TravelDatePicker에 onNext prop 전달
         <TravelDatePicker onNext={handleNext} />  
       ) : (
         <div>

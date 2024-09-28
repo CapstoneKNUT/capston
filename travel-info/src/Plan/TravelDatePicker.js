@@ -1,10 +1,9 @@
-// TravelDatePicker.js
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './TravelDatePicker.css';
 
-function TravelDatePicker({ onNext }) {  // onNext prop을 받음
+function TravelDatePicker({ onNext }) {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -15,8 +14,16 @@ function TravelDatePicker({ onNext }) {  // onNext prop을 받음
   };
 
   const handleNextStep = () => {
+    // 선택된 날짜가 모두 있는지 확인
     if (!startDate || !endDate) {
       alert("여행 날짜를 모두 선택해 주세요.");
+      return;
+    }
+
+    // 선택된 날짜가 올바른 범위 내에 있는지 확인
+    const dateDifference = (endDate - startDate) / (1000 * 60 * 60 * 24); // 날짜 차이 계산
+    if (dateDifference > 10) {
+      alert("여행 기간은 최대 10일까지 설정 가능합니다.");
       return;
     }
 
@@ -35,8 +42,8 @@ function TravelDatePicker({ onNext }) {  // onNext prop을 받음
         endDate={endDate}
         selectsRange
         inline
-        minDate={new Date()}
-        maxDate={new Date().setDate(new Date().getDate() + 365)}
+        minDate={new Date()} // 오늘 날짜 이후로만 선택 가능
+        maxDate={new Date().setDate(new Date().getDate() + 365)} // 1년 후까지 선택 가능
         monthsShown={2}
         dateFormat="yyyy년 MM월 dd일"
       />

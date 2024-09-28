@@ -11,6 +11,7 @@ import Mypage from './MyPage';
 import Date from './Plan/TravelDatePicker';
 import Travelplan from './Plan/TravelPlan';
 import NextStep from './Plan/NextStep';
+import Favorite from './place/FavoritesPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path='/date' element={<Date />} />
         <Route path="/travelplan" element={<Travelplan />} />
         <Route path="/next-step" element={<NextStep />} />
+        <Route path="/favorite" element={<Favorite />} />
       </Routes>
     </Router>
   );

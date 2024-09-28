@@ -7,6 +7,12 @@ function Lists() {
   const [locationInput, setLocationInput] = useState('');
   const [districtInput, setDistrictInput] = useState('');
   const [keywordInput, setKeywordInput] = useState('');
+  const [favorites, setFavorites] = useState(() => {
+    // localStorage에서 찜 목록을 초기화
+    const savedFavorites = localStorage.getItem('favorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+
   const location = useLocation();
   const navigate = useNavigate(); // useHistory 대신 useNavigate 사용
 
@@ -62,6 +68,23 @@ function Lists() {
     setResults(filteredResults);
   }, [location, relatedTravelWords]);
 
+  // 찜 목록에 추가 또는 제거하는 함수
+  const toggleFavorite = (item) => {
+    const isFavorite = favorites.some(fav => fav.id === item.id);
+    let updatedFavorites;
+
+    if (isFavorite) {
+      // 이미 찜한 항목이면 제거
+      updatedFavorites = favorites.filter(fav => fav.id !== item.id);
+    } else {
+      // 찜 목록에 추가
+      updatedFavorites = [...favorites, item];
+    }
+
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites)); // localStorage에 저장
+  };
+
   return (
     <div className="results-page">
       <h2>검색 결과</h2>
@@ -97,6 +120,20 @@ function Lists() {
               <div>{item.category}</div>
               <div>{item.location} - {item.district}</div>
             </Link>
+            {/* 찜 버튼 */}
+            <button onClick={() => toggleFavorite(item)}>
+              {favorites.some(fav => fav.id === item.id) ? '찜 해제' : '찜'}
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <h3>찜 목록</h3>
+      <ul className="favorites-list">
+        {favorites.map((fav) => (
+          <li key={fav.id}>
+            <div>{fav.name}</div>
+            <div>{fav.location} - {fav.district}</div>
           </li>
         ))}
       </ul>
