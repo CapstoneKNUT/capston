@@ -4,19 +4,18 @@ import './Lists.css';  // CSS 파일을 임포트
 
 function Lists() {
   const [results, setResults] = useState([]);
-  const [locationInput, setLocationInput] = useState('');
-  const [districtInput, setDistrictInput] = useState('');
-  const [keywordInput, setKeywordInput] = useState('');
   const [favorites, setFavorites] = useState(() => {
-    // localStorage에서 찜 목록을 초기화
     const savedFavorites = localStorage.getItem('favorites');
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
-
+  
+  const [locationInput, setLocationInput] = useState('');
+  const [districtInput, setDistrictInput] = useState('');
+  const [keywordInput, setKeywordInput] = useState('');
   const location = useLocation();
-  const navigate = useNavigate(); // useHistory 대신 useNavigate 사용
+  const navigate = useNavigate();
 
-  // "여행지"와 관련된 단어 리스트
+  // 여행지와 관련된 단어 리스트
   const relatedTravelWords = ['attraction', 'beach', 'park', 'mountain', 'museum', 'cafe', 'landmark'];
 
   // 검색 기능
@@ -28,7 +27,7 @@ function Lists() {
     if (districtInput) searchParams.append('district', districtInput);
     if (keywordInput) searchParams.append('keyword', keywordInput);
     
-    navigate(`?${searchParams.toString()}`); // useNavigate로 페이지 이동
+    navigate(`?${searchParams.toString()}`);
   };
 
   useEffect(() => {
@@ -45,19 +44,16 @@ function Lists() {
       { id: 5, name: '강릉 커피숍', category: 'cafe', location: '강원도', district: '강릉시' },
     ];
 
-    // 검색 조건이 모두 비어 있으면 모든 항목을 보여줌
     if (!locationParam && !districtParam && !keywordParam) {
       setResults(allResults);
       return;
     }
 
-    // 검색 조건이 있을 경우 필터링
     const filteredResults = allResults.filter((item) => {
       const matchesLocation = locationParam ? item.location.includes(locationParam) : true;
       const matchesDistrict = districtParam ? item.district.includes(districtParam) : true;
       const matchesKeyword = keywordParam ? item.name.includes(keywordParam) : true;
 
-      // 카테고리 또는 이름에 여행지 관련 단어가 있는지 확인
       const isTravelRelated = relatedTravelWords.some((word) =>
         item.category.includes(word) || item.name.includes(word)
       );
@@ -68,40 +64,38 @@ function Lists() {
     setResults(filteredResults);
   }, [location, relatedTravelWords]);
 
-  // 찜 목록에 추가 또는 제거하는 함수
-  const toggleFavorite = (item) => {
-    const isFavorite = favorites.some(fav => fav.id === item.id);
+  const toggleFavorite = (id) => {
+    const isFavorite = favorites.some(fav => fav.id === id);
     let updatedFavorites;
 
     if (isFavorite) {
-      // 이미 찜한 항목이면 제거
-      updatedFavorites = favorites.filter(fav => fav.id !== item.id);
+      updatedFavorites = favorites.filter(fav => fav.id !== id);
     } else {
-      // 찜 목록에 추가
-      updatedFavorites = [...favorites, item];
+      const favoriteItem = results.find(item => item.id === id);
+      updatedFavorites = [...favorites, favoriteItem];
     }
 
     setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites)); // localStorage에 저장
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    window.dispatchEvent(new Event('storage')); // storage 이벤트 발생
   };
 
   return (
     <div className="results-page">
       <h2>검색 결과</h2>
       
-      {/* 검색창 */}
       <form className="search-form" onSubmit={handleSearch}>
         <input
           type="text"
           value={districtInput}
           onChange={(e) => setDistrictInput(e.target.value)}
-          placeholder="위치 검색" // 위치 검색 (구/군)
+          placeholder="위치 검색"
         />
         <input
           type="text"
           value={locationInput}
           onChange={(e) => setLocationInput(e.target.value)}
-          placeholder="지역 검색" // 지역 검색 (시/도)
+          placeholder="지역 검색"
         />
         <input
           type="text"
@@ -120,20 +114,9 @@ function Lists() {
               <div>{item.category}</div>
               <div>{item.location} - {item.district}</div>
             </Link>
-            {/* 찜 버튼 */}
-            <button onClick={() => toggleFavorite(item)}>
+            <button onClick={() => toggleFavorite(item.id)}>
               {favorites.some(fav => fav.id === item.id) ? '찜 해제' : '찜'}
             </button>
-          </li>
-        ))}
-      </ul>
-
-      <h3>찜 목록</h3>
-      <ul className="favorites-list">
-        {favorites.map((fav) => (
-          <li key={fav.id}>
-            <div>{fav.name}</div>
-            <div>{fav.location} - {fav.district}</div>
           </li>
         ))}
       </ul>

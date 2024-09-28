@@ -1,5 +1,4 @@
-// src/place/Read.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Read.css';
 
@@ -17,9 +16,53 @@ const storeDetails = {
   // 다른 가게 정보 추가
 };
 
-function Read() { // 함수 이름을 대문자로 시작하도록 변경
-  const { storeId } = useParams(); // 훅을 컴포넌트 최상위 레벨에서 사용
+function Read() {
+  const { storeId } = useParams();
   const store = storeDetails[storeId];
+  
+  const [favorites, setFavorites] = useState(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+
+  const isFavorite = favorites.some(fav => fav.id === parseInt(storeId));
+
+  const toggleFavorite = () => {
+    let updatedFavorites;
+
+    if (isFavorite) {
+      updatedFavorites = favorites.filter(fav => fav.id !== parseInt(storeId));
+    } else {
+      const newFavorite = {
+        id: parseInt(storeId),
+        name: store.name,
+        address: store.address,
+        phone: store.phone,
+        website: store.website,
+        hours: store.hours,
+        categories: store.categories,
+      };
+      updatedFavorites = [...favorites, newFavorite];
+    }
+
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    window.dispatchEvent(new Event('storage')); // storage 이벤트 발생
+  };
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const savedFavorites = localStorage.getItem('favorites');
+      if (savedFavorites) {
+        setFavorites(JSON.parse(savedFavorites));
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   if (!store) {
     return <div>가게 정보를 찾을 수 없습니다.</div>;
@@ -41,8 +84,12 @@ function Read() { // 함수 이름을 대문자로 시작하도록 변경
           <button key={index}>{category}</button>
         ))}
       </div>
+      
+      <button className="favorite-button" onClick={toggleFavorite}>
+        {isFavorite ? '찜 해제' : '찜'}
+      </button>
     </div>
   );
 }
 
-export default Read; // 변경된 컴포넌트 이름에 따라 export 문도 변경
+export default Read;
