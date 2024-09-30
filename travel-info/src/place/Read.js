@@ -4,14 +4,15 @@ import './Read.css';
 
 const storeDetails = {
   1: {
-    name: '남토하우스 양주점',
-    address: '경기 양주시 청담로 187-30 남토하우스',
-    phone: '0507-1337-0806',
-    website: 'https://pcmap.place.naver.com/restaurant/1781611988/home',
-    hours: '매일 10:00 - 20:00',
-    description: '경기도 양주에 위치한 남토하우스 양주점은...',
-    image: '/images/store1.jpg',
-    categories: ['베이커리', '소형견', '실내', '캐리어'],
+    p_name: '남토하우스 양주점',
+    p_location: '경기 양주시 청담로 187-30 남토하우스',
+    p_call: '0507-1337-0806',
+    p_site: 'https://pcmap.place.naver.com/restaurant/1781611988/home',
+    p_opentime: '매일 10:00 - 20:00',
+    p_content: '경기도 양주에 위치한 남토하우스 양주점은...',
+    p_image: '/images/store1.jpg',
+    p_category: ['베이커리', '소형견', '실내', '캐리어'],
+    p_park: '가능 (건물 내 지하주차장)',
   },
   // 다른 가게 정보 추가
 };
@@ -19,7 +20,7 @@ const storeDetails = {
 function Read() {
   const { storeId } = useParams();
   const store = storeDetails[storeId];
-  
+
   const [favorites, setFavorites] = useState(() => {
     const savedFavorites = localStorage.getItem('favorites');
     return savedFavorites ? JSON.parse(savedFavorites) : [];
@@ -35,12 +36,13 @@ function Read() {
     } else {
       const newFavorite = {
         id: parseInt(storeId),
-        name: store.name,
-        address: store.address,
-        phone: store.phone,
-        website: store.website,
-        hours: store.hours,
-        categories: store.categories,
+        p_name: store.p_name,
+        p_location: store.p_location,
+        p_call: store.p_call,
+        p_site: store.p_site,
+        p_opentime: store.p_opentime,
+        p_category: store.p_category,
+        p_park: store.p_park,
       };
       updatedFavorites = [...favorites, newFavorite];
     }
@@ -70,17 +72,18 @@ function Read() {
 
   return (
     <div className="detail-page">
-      <h1>{store.name}</h1>
-      <p>{store.description}</p>
-      <img src={store.image} alt={store.name} />
+      <h1>{store.p_name}</h1>
+      <p>{store.p_content}</p>
+      <img src={store.p_image} alt={store.p_name} />
       <div className="store-info">
-        <p><strong>주소:</strong> {store.address}</p>
-        <p><strong>연락처:</strong> {store.phone}</p>
-        <p><strong>홈페이지:</strong> <a href={store.website} target="_blank" rel="noopener noreferrer">{store.website}</a></p>
-        <p><strong>영업시간:</strong> {store.hours}</p>
+        <p><strong>주소:</strong> {store.p_location}</p>
+        <p><strong>연락처:</strong> {store.p_call}</p>
+        <p><strong>홈페이지:</strong> <a href={store.p_site} target="_blank" rel="noopener noreferrer">{store.p_site}</a></p>
+        <p><strong>영업시간:</strong> {store.p_opentime}</p>
+        <p><strong>주차 안내:</strong> {store.p_park}</p>
       </div>
       <div className="store-categories">
-        {store.categories.map((category, index) => (
+        {store.p_category.map((category, index) => (
           <button key={index}>{category}</button>
         ))}
       </div>

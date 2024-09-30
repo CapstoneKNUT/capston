@@ -18,8 +18,8 @@ function App() {
     <Router>
       <HeaderPage />
       <Routes>
-        <Route path="/list" element={<List />} />
-        <Route path="/detail/:storeId" element={<Detail />} />
+        <Route path="/place/list" element={<List />} />
+        <Route path="/place/read/:storeId" element={<Detail />} />
         <Route path="/member/:join" element={<Signup />} />
         <Route path="/member" element={<Login />} />
         <Route path="/main" element={<Main />} />

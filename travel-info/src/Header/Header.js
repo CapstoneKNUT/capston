@@ -14,7 +14,7 @@ function Header() {
         <Link to="/main">🏠 Home</Link>
       </div>
       <div className='travel-info'>
-        <Link to="/list">여행지 정보</Link>
+        <Link to="/place/list">여행지 정보</Link>
       </div>
       <div className='travel-info'>
         <Link to="/date">일정 짜기</Link>
