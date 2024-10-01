@@ -58,9 +58,9 @@ function Lists() {
       },
       {
         p_ord: 3,
-        p_name: '부산 해운대',
+        p_name: '부산광역시 해운대',
         p_category: 'beach',
-        p_location: '부산 해운대구',
+        p_location: '부산광역시 해운대구',
         p_image: '/images/haeundae.jpg',
         p_star: 4.7,
       },
