@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import './Lists.css';  // CSS 파일을 임포트
+import { area } from './Area';  // 지역 데이터를 임포트
 
 function Lists() {
-  const [places, setPlaces] = useState([]); // 기존 results -> places로 변경
+  const [places, setPlaces] = useState([]);
   const [bookmarks, setBookmarks] = useState(() => {
     const savedBookmarks = localStorage.getItem('bookmarks');
     return savedBookmarks ? JSON.parse(savedBookmarks) : [];
   });
 
-  const [locationInput, setLocationInput] = useState('');
-  const [districtInput, setDistrictInput] = useState('');
+  const [selectedArea, setSelectedArea] = useState(''); // 지역 선택
+  const [selectedSubArea, setSelectedSubArea] = useState(''); // 세부 지역 선택
   const [keywordInput, setKeywordInput] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
-  // "여행지"와 관련된 단어 리스트
-  const relatedTravelWords = ['attraction', 'beach', 'park', 'mountain', 'museum', 'cafe', 'landmark'];
+  // 하위 지역 필터링 함수
+  const filteredSubArea = selectedArea
+    ? area.find((a) => a.name === selectedArea)?.subArea || []
+    : [];
 
   // 검색 기능
   const handleSearch = (e) => {
     e.preventDefault();
 
     const searchParams = new URLSearchParams();
-    if (locationInput) searchParams.append('location', locationInput);
-    if (districtInput) searchParams.append('district', districtInput);
+    if (selectedArea) searchParams.append('location', selectedArea);
+    if (selectedSubArea && selectedSubArea !== '지역 전체') searchParams.append('district', selectedSubArea);
     if (keywordInput) searchParams.append('keyword', keywordInput);
 
     navigate(`?${searchParams.toString()}`);
@@ -79,25 +82,21 @@ function Lists() {
       },
     ];
 
-    if (!locationParam && !districtParam && !keywordParam) {
-      setPlaces(allPlaces);
-      return;
-    }
-
     const filteredPlaces = allPlaces.filter((item) => {
       const matchesLocation = locationParam ? item.p_location.includes(locationParam) : true;
       const matchesDistrict = districtParam ? item.p_location.includes(districtParam) : true;
       const matchesKeyword = keywordParam ? item.p_name.includes(keywordParam) : true;
 
-      const isTravelRelated = relatedTravelWords.some((word) =>
-        item.p_category.includes(word) || item.p_name.includes(word)
-      );
-
-      return matchesDistrict && matchesLocation && matchesKeyword && isTravelRelated;
+      return matchesLocation && matchesDistrict && matchesKeyword;
     });
 
-    setPlaces(filteredPlaces);
-  }, [location, relatedTravelWords]);
+    // 만약 selectedArea와 selectedSubArea가 없으면 모든 게시물을 표시
+    if (!locationParam && !districtParam && !keywordParam) {
+      setPlaces(allPlaces);
+    } else {
+      setPlaces(filteredPlaces);
+    }
+  }, [location]);
 
   const toggleBookmark = (p_ord) => {
     const isBookmarked = bookmarks.some(bookmark => bookmark.p_ord === p_ord);
@@ -112,27 +111,34 @@ function Lists() {
 
     setBookmarks(updatedBookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
-    window.dispatchEvent(new Event('storage')); // storage 이벤트 발생
+    window.dispatchEvent(new Event('storage'));
   };
 
   return (
     <div className="results-page">
       <h2>검색 결과</h2>
       
-      {/* 검색창 */}
+      {/* 검색창을 select box로 변경 */}
       <form className="search-form" onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={districtInput}
-          onChange={(e) => setDistrictInput(e.target.value)}
-          placeholder="위치 검색"
-        />
-        <input
-          type="text"
-          value={locationInput}
-          onChange={(e) => setLocationInput(e.target.value)}
-          placeholder="지역 검색"
-        />
+        <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
+          <option value="">지역 선택</option>
+          {area.map((a) => (
+            <option key={a.name} value={a.name}>
+              {a.name}
+            </option>
+          ))}
+        </select>
+
+        <select value={selectedSubArea} onChange={(e) => setSelectedSubArea(e.target.value)} disabled={!selectedArea}>
+          <option value="">시/구/군</option>
+          <option value="지역 전체">지역 전체</option> {/* 지역 전체 추가 */}
+          {filteredSubArea.map((sub, index) => (
+            <option key={index} value={sub}>
+              {sub}
+            </option>
+          ))}
+        </select>
+
         <input
           type="text"
           value={keywordInput}
