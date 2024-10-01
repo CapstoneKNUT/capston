@@ -22,20 +22,20 @@ function Read() {
   const store = storeDetails[storeId];
 
   const [favorites, setFavorites] = useState(() => {
-    const savedFavorites = localStorage.getItem('favorites');
+    const savedFavorites = localStorage.getItem('bookmarks');
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
 
-  const isFavorite = favorites.some(fav => fav.id === parseInt(storeId));
+  const isFavorite = favorites.some(fav => fav.p_ord === parseInt(storeId));
 
   const toggleFavorite = () => {
     let updatedFavorites;
 
     if (isFavorite) {
-      updatedFavorites = favorites.filter(fav => fav.id !== parseInt(storeId));
+      updatedFavorites = favorites.filter(fav => fav.p_ord !== parseInt(storeId));
     } else {
       const newFavorite = {
-        id: parseInt(storeId),
+        p_ord: parseInt(storeId),
         p_name: store.p_name,
         p_location: store.p_location,
         p_call: store.p_call,
@@ -48,13 +48,13 @@ function Read() {
     }
 
     setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    window.dispatchEvent(new Event('storage')); // storage 이벤트 발생
+    localStorage.setItem('bookmarks', JSON.stringify(updatedFavorites));
+    window.dispatchEvent(new Event('storage'));
   };
 
   useEffect(() => {
     const handleStorageChange = () => {
-      const savedFavorites = localStorage.getItem('favorites');
+      const savedFavorites = localStorage.getItem('bookmarks');
       if (savedFavorites) {
         setFavorites(JSON.parse(savedFavorites));
       }
@@ -87,9 +87,17 @@ function Read() {
           <button key={index}>{category}</button>
         ))}
       </div>
-      
-      <button className="favorite-button" onClick={toggleFavorite}>
-        {isFavorite ? '찜 해제' : '찜'}
+
+      <button className="favorite-button" onClick={toggleFavorite} style={{ position: 'relative', background: 'none', border: 'none', cursor: 'pointer' }}>
+        {isFavorite ? (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="pink" stroke="black" width="24px" height="24px">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" width="24px" height="24px">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+        )}
       </button>
     </div>
   );

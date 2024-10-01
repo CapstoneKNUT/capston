@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import './Lists.css';  // CSS 파일을 임포트
-import { area } from './Area';  // 지역 데이터를 임포트
+import './Lists.css';
+import { area } from './Area';
 
 function Lists() {
   const [places, setPlaces] = useState([]);
@@ -10,8 +10,8 @@ function Lists() {
     return savedBookmarks ? JSON.parse(savedBookmarks) : [];
   });
 
-  const [selectedArea, setSelectedArea] = useState(''); // 지역 선택
-  const [selectedSubArea, setSelectedSubArea] = useState(''); // 세부 지역 선택
+  const [selectedArea, setSelectedArea] = useState('');
+  const [selectedSubArea, setSelectedSubArea] = useState('');
   const [keywordInput, setKeywordInput] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
@@ -80,6 +80,7 @@ function Lists() {
         p_image: '/images/gangneung.jpg',
         p_star: 4.6,
       },
+      // 다른 장소 추가
     ];
 
     const filteredPlaces = allPlaces.filter((item) => {
@@ -90,7 +91,6 @@ function Lists() {
       return matchesLocation && matchesDistrict && matchesKeyword;
     });
 
-    // 만약 selectedArea와 selectedSubArea가 없으면 모든 게시물을 표시
     if (!locationParam && !districtParam && !keywordParam) {
       setPlaces(allPlaces);
     } else {
@@ -117,8 +117,6 @@ function Lists() {
   return (
     <div className="results-page">
       <h2>검색 결과</h2>
-      
-      {/* 검색창을 select box로 변경 */}
       <form className="search-form" onSubmit={handleSearch}>
         <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
           <option value="">지역 선택</option>
@@ -131,7 +129,7 @@ function Lists() {
 
         <select value={selectedSubArea} onChange={(e) => setSelectedSubArea(e.target.value)} disabled={!selectedArea}>
           <option value="">시/구/군</option>
-          <option value="지역 전체">지역 전체</option> {/* 지역 전체 추가 */}
+          <option value="지역 전체">지역 전체</option>
           {filteredSubArea.map((sub, index) => (
             <option key={index} value={sub}>
               {sub}
@@ -147,7 +145,7 @@ function Lists() {
         />
         <button type="submit">검색</button>
       </form>
-      
+
       <ul className="results-list">
         {places.map((place) => (
           <li key={place.p_ord}>
@@ -158,8 +156,16 @@ function Lists() {
               <img src={place.p_image} alt={place.p_name} style={{ width: '100px' }} />
               <div>⭐ {place.p_star}</div>
             </Link>
-            <button onClick={() => toggleBookmark(place.p_ord)}>
-              {bookmarks.some(bookmark => bookmark.p_ord === place.p_ord) ? '찜 해제' : '찜'}
+            <button onClick={() => toggleBookmark(place.p_ord)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+              {bookmarks.some(bookmark => bookmark.p_ord === place.p_ord) ? (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="pink" stroke="black" width="24px" height="24px">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" width="24px" height="24px">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+              )}
             </button>
           </li>
         ))}

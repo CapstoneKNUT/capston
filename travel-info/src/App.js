@@ -14,6 +14,7 @@ import NextStep from './Plan/NextStep';
 import Favorite from './place/FavoritesPage';
 import DateSelect from './Plan/DateSelect';
 import NextPage from './Plan/NextPage';
+import MyPage_modal from './Mypage_modal'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/favorite" element={<Favorite />} />
         <Route path="/dateselect" element={<DateSelect />} />
         <Route path="/nextpage" element={<NextPage />} />
+        <Route path="/mypage_modal" element={<MyPage_modal />} />
       </Routes>
     </Router>
   );
