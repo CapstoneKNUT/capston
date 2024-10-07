@@ -14,7 +14,7 @@ import NextStep from './Plan/NextStep';
 import Favorite from './place/FavoritesPage';
 import DateSelect from './Plan/DateSelect';
 import NextPage from './Plan/NextPage';
-import MyPage_modal from './Mypage_modal'
+import MyPage_modal from './Plan/Mypage_modal'
 
 function App() {
   return (
