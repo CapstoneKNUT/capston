@@ -11,8 +11,8 @@ function FavoritesPage() {
     }
   }, []);
 
-  const removeBookmark = (p_ord) => {
-    const updatedBookmarks = bookmarks.filter(bookmark => bookmark.p_ord !== p_ord);
+  const removeBookmark = (p_address) => {
+    const updatedBookmarks = bookmarks.filter(bookmark => bookmark.p_address !== p_address);
     setBookmarks(updatedBookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
   };
@@ -25,7 +25,7 @@ function FavoritesPage() {
       ) : (
         <ul className="bookmarks-list">
           {bookmarks.map((bookmark) => (
-            <li key={bookmark.p_ord}>
+            <li key={bookmark.p_address}>
               <Link to={`/detail/${bookmark.p_ord}`}>
                 <div>{bookmark.p_name}</div>
                 <div>
@@ -37,7 +37,7 @@ function FavoritesPage() {
                 <div>별점: ⭐ {bookmark.p_star}</div>
                 {bookmark.p_image && <img src={bookmark.p_image} alt={bookmark.p_name} />}
               </Link>
-              <button onClick={() => removeBookmark(bookmark.p_ord)}>삭제</button>
+              <button onClick={() => removeBookmark(bookmark.p_address)}>삭제</button>
             </li>
           ))}
         </ul>
