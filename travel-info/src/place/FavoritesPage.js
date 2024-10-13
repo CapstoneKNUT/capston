@@ -4,13 +4,18 @@ import { Link } from 'react-router-dom';
 function FavoritesPage() {
   const [bookmarks, setBookmarks] = useState([]);
 
-  // 컴포넌트가 마운트되면 localStorage에서 찜 목록을 가져옴
   useEffect(() => {
     const savedBookmarks = localStorage.getItem('bookmarks');
     if (savedBookmarks) {
       setBookmarks(JSON.parse(savedBookmarks));
     }
   }, []);
+
+  const removeBookmark = (p_ord) => {
+    const updatedBookmarks = bookmarks.filter(bookmark => bookmark.p_ord !== p_ord);
+    setBookmarks(updatedBookmarks);
+    localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+  };
 
   return (
     <div className="bookmarks-page">
@@ -24,7 +29,6 @@ function FavoritesPage() {
               <Link to={`/detail/${bookmark.p_ord}`}>
                 <div>{bookmark.p_name}</div>
                 <div>
-                  {/* p_category가 배열일 때만 join 사용 */}
                   {Array.isArray(bookmark.p_category)
                     ? bookmark.p_category.join(', ')
                     : bookmark.p_category}
@@ -33,6 +37,7 @@ function FavoritesPage() {
                 <div>별점: ⭐ {bookmark.p_star}</div>
                 {bookmark.p_image && <img src={bookmark.p_image} alt={bookmark.p_name} />}
               </Link>
+              <button onClick={() => removeBookmark(bookmark.p_ord)}>삭제</button>
             </li>
           ))}
         </ul>
