@@ -17,13 +17,13 @@ function Header() {
         <Link to="/place/list">여행지 정보</Link>
       </div>
       <div className='travel-info'>
-        <Link to="/dateselect">일정 짜기</Link>
+        <Link to="/plan">일정 짜기</Link>
       </div>
       <div className='travel-info'>
         <Link to="/review">리뷰 목록</Link>
       </div>
       <div className='travel-info'>
-        <Link to="/favorite">찜 목록</Link>
+        <Link to="/store/list">찜 목록</Link>
       </div>
       <div className='travel-info'>
         <Link to="/mine">마이 페이지</Link>

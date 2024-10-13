@@ -29,8 +29,9 @@ function FavoritesPage() {
                     ? bookmark.p_category.join(', ')
                     : bookmark.p_category}
                 </div>
-                <div>{bookmark.p_location}</div>
+                <div>{bookmark.p_address}</div>
                 <div>별점: ⭐ {bookmark.p_star}</div>
+                {bookmark.p_image && <img src={bookmark.p_image} alt={bookmark.p_name} />}
               </Link>
             </li>
           ))}

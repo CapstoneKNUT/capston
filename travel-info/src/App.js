@@ -30,8 +30,8 @@ function App() {
         <Route path='/date' element={<Date />} />
         <Route path="/travelplan" element={<Travelplan />} />
         <Route path="/next-step" element={<NextStep />} />
-        <Route path="/favorite" element={<Favorite />} />
-        <Route path="/dateselect" element={<DateSelect />} />
+        <Route path="/store/list" element={<Favorite />} />
+        <Route path="/plan" element={<DateSelect />} />
         <Route path="/nextpage" element={<NextPage />} />
         <Route path="/mypage_modal" element={<MyPage_modal />} />
       </Routes>
