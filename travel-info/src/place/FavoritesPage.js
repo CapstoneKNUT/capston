@@ -2,19 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function FavoritesPage() {
-  const [bookmarks, setBookmarks] = useState([]);
+  const [bookmarks, setBookmarks] = useState(() => {
+    const savedBookmarks = localStorage.getItem('bookmarks');
+    return savedBookmarks ? JSON.parse(savedBookmarks) : [];
+  });
 
   useEffect(() => {
-    const savedBookmarks = localStorage.getItem('bookmarks');
-    if (savedBookmarks) {
-      setBookmarks(JSON.parse(savedBookmarks));
-    }
+    const handleStorageChange = () => {
+      const updatedBookmarks = localStorage.getItem('bookmarks');
+      setBookmarks(updatedBookmarks ? JSON.parse(updatedBookmarks) : []);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
-  const removeBookmark = (p_address) => {
-    const updatedBookmarks = bookmarks.filter(bookmark => bookmark.p_address !== p_address);
+  const removeBookmark = (p_ord) => {
+    // p_ord를 기준으로 특정 항목만 필터링하여 삭제
+    const updatedBookmarks = bookmarks.filter(bookmark => bookmark.p_ord !== p_ord);
     setBookmarks(updatedBookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+    window.dispatchEvent(new Event('storage'));
   };
 
   return (
@@ -25,19 +33,15 @@ function FavoritesPage() {
       ) : (
         <ul className="bookmarks-list">
           {bookmarks.map((bookmark) => (
-            <li key={bookmark.p_address}>
+            <li key={bookmark.p_ord}>
               <Link to={`/detail/${bookmark.p_ord}`}>
                 <div>{bookmark.p_name}</div>
-                <div>
-                  {Array.isArray(bookmark.p_category)
-                    ? bookmark.p_category.join(', ')
-                    : bookmark.p_category}
-                </div>
-                <div>{bookmark.p_address}</div>
+                <div>{bookmark.p_category}</div>
+                <div>{bookmark.p_location}</div>
                 <div>별점: ⭐ {bookmark.p_star}</div>
                 {bookmark.p_image && <img src={bookmark.p_image} alt={bookmark.p_name} />}
               </Link>
-              <button onClick={() => removeBookmark(bookmark.p_address)}>삭제</button>
+              <button onClick={() => removeBookmark(bookmark.p_ord)}>삭제</button>
             </li>
           ))}
         </ul>
